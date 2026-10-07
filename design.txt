@@ -1,0 +1,326 @@
+Implement the UI design I provide from Kombai.
+
+THIS IS A UI-ONLY TASK.
+
+Your job is to reproduce the provided design inside the existing QR Attendance app while preserving the entire existing application.
+
+DO NOT CHANGE ANY FUNCTIONALITY.
+
+You may modify ONLY:
+
+* JSX layout related to visual presentation
+* StyleSheet/styles
+* Colors
+* Typography
+* Spacing
+* Sizes
+* Borders
+* Border radius
+* Shadows
+* Gradients
+* Existing visual components
+* Existing UI animations if they are simple and safe
+
+DO NOT MODIFY:
+
+* Supabase
+* Authentication
+* Login/register logic
+* Database queries
+* Database mutations
+* QR scanning logic
+* Attendance logic
+* API calls
+* State/data logic unless absolutely required to display existing data
+* Navigation
+* Routes
+* Expo Router configuration
+* app.json
+* eas.json
+* package.json
+* package-lock.json
+* .env
+* EAS configuration
+* Android configuration
+
+DO NOT:
+
+* install packages
+* remove packages
+* create a new UI framework
+* add new dependencies
+* rewrite the application architecture
+* rewrite working business logic
+* rename existing routes
+* move files unnecessarily
+* create complicated animation systems
+* create unnecessary abstractions
+
+IMPORTANT STABILITY RULE:
+
+The existing app already works.
+
+Treat the existing functionality as LOCKED.
+
+Only change what is necessary to make the interface visually match the Kombai design.
+
+If the design can be implemented using the existing components/dependencies, use them.
+
+If a visual effect would require a new package or complicated native code, use a simpler React Native implementation instead.
+
+Do not sacrifice app stability for visual effects.
+
+IMPLEMENTATION METHOD:
+
+1. Inspect the current screen.
+2. Identify the existing functional logic.
+3. Leave that logic untouched.
+4. Modify the visual structure/styles only where necessary.
+5. Keep existing handlers, functions, data fetching, and navigation intact.
+6. Run `npx tsc --noEmit` after the UI implementation.
+7. Fix only errors caused by your UI changes.
+
+Do NOT recursively scan the entire project.
+Do NOT call `list_files` repeatedly.
+Do NOT modify files unrelated to the UI being redesigned.
+
+KOMBAI DESIGN:
+Act as a senior product designer and elite mobile UI/UX designer.
+
+Redesign the existing QR Attendance mobile app with a premium, modern glassmorphism aesthetic.
+
+CORE VISUAL IDENTITY
+
+Use a BLUE + VIOLET GRADIENT visual system inspired by the supplied mobile UI references.
+
+Primary colors:
+
+* Electric blue
+* Deep cobalt blue
+* Soft periwinkle
+* Violet/cyan glow accents
+* White
+* Deep navy for strong contrast
+
+The background should feel like a smooth warm gradient:
+SOFT BLUE → ELECTRIC BLUE → VIOLET
+
+Do NOT make the interface look flat or like a basic orange theme.
+
+GLASSMORPHISM
+
+The main visual language should be premium glassmorphism.
+
+Use:
+
+* translucent white glass surfaces
+* soft blue-tinted glass
+* subtle borders
+* soft shadows
+* gentle highlights
+* layered cards
+* rounded corners
+* controlled transparency
+* subtle depth
+* soft reflections
+
+The glass should feel elegant and clean, NOT overly blurry.
+
+BUTTON DESIGN
+
+Create beautiful bubbly glass buttons.
+
+Buttons should have:
+
+* large rounded/pill shapes
+* translucent glass surface
+* electric-blue accents
+* subtle inner highlight
+* soft shadow
+* smooth pressed state
+* clear icon + text alignment
+* comfortable touch area
+
+Use electric-blue buttons for important actions.
+
+Use white/transparent glass buttons for secondary actions.
+
+LAYOUT
+
+Make the interface feel like a professionally designed modern mobile application.
+
+Use:
+
+* strong visual hierarchy
+* generous spacing
+* large rounded cards
+* clean typography
+* clear sections
+* beautiful hero areas
+* balanced white space
+* consistent corner radius
+* consistent spacing system
+
+Avoid clutter.
+
+Avoid putting every element inside a card.
+
+Use large visual areas and negative space to make the interface feel expensive.
+
+
+TYPOGRAPHY
+
+Treat typography as a primary design element, not a final polish step. The supplied references use a rounded/geometric modern sans-serif character with bold display headings, compact uppercase labels, readable body copy, and prominent statistic numbers.
+
+Typography direction:
+
+* Prefer a geometric/rounded sans-serif feel similar to Poppins or Avenir Next.
+* Use the existing dependency-free font setup; do not install a font package solely for a minor visual difference.
+* Use strong 700–800 weights for display and section headings rather than 900 everywhere.
+* Use 400–600 weights for body and supporting text.
+* Use compact uppercase labels with deliberate tracking around 0.8–1.6.
+* Use tighter letter spacing on large headings and statistics.
+* Keep body line height around 1.45–1.55× font size for comfortable mobile reading.
+* Keep button labels medium-bold and compact.
+* Use deep navy and electric-blue text hierarchy so important content feels connected to the blue gradient identity.
+* Avoid making every text element the same size or weight.
+
+The implementation uses Avenir Next on iOS when available and the native sans-serif family on Android, with a shared typography scale in constants/typography.ts.
+
+STYLE
+
+The design should feel:
+
+Premium
+Modern
+Warm
+Playful
+Clean
+Friendly
+Interactive
+Professional
+
+Think:
+
+"Premium glassmorphism mobile app with an airy blue-to-violet identity."
+
+NOT:
+
+"Basic student attendance app with orange buttons."
+
+COLOR BALANCE
+
+Do NOT make the entire screen orange.
+
+Use the gradient as the environmental/background color.
+
+Use white and translucent glass for surfaces.
+
+Use black/near-black for important text.
+
+Use electric blue for primary actions and highlights.
+
+Use violet/cyan as secondary accents.
+
+Keep contrast and readability excellent.
+
+ANIMATION
+
+Use subtle micro-interactions only:
+
+* button press
+* gentle scale
+* soft fade
+* subtle card entrance
+* small floating effects
+
+Animations should feel smooth and premium.
+
+Do NOT create complicated animation systems.
+
+MOBILE FIRST
+
+Design specifically for a mobile phone.
+
+Make:
+
+* buttons easy to tap
+* text readable
+* cards comfortable
+* navigation obvious
+* spacing consistent
+* content scroll naturally
+
+QR ATTENDANCE APP
+
+The design should clearly support these main areas:
+
+* Dashboard / Home
+* QR Scanner
+* Attendance History
+* Profile
+* Teacher/Event functionality if present
+
+The QR scanner should remain visually focused and easy to use.
+
+IMPORTANT
+
+This is a redesign of an EXISTING application.
+
+Do NOT change:
+
+* authentication
+* Supabase
+* database
+* QR scanning functionality
+* attendance logic
+* navigation
+* routes
+* API behavior
+
+Focus entirely on the visual design and UX.
+
+Do not overcomplicate the interface.
+
+The final result should look like a polished commercial mobile application while remaining simple enough to implement safely in React Native/Expo.
+
+FINAL REPORT:
+
+UI FILES MODIFIED:
+UI FILES MODIFIED:
+
+List ONLY the exact files you actually modified to implement the Kombai design.
+
+Do not list files that were only inspected.
+Do not list files that were not changed.
+Do not modify additional files just to match this report.
+
+For example:
+
+UI FILES MODIFIED:
+
+* app/(tabs)/index.tsx
+* app/(tabs)/history.tsx
+* app/(tabs)/scan.tsx
+* components/AppButton.tsx
+* components/Header.tsx
+
+Use the actual files you changed, not this example list.
+
+
+FUNCTIONALITY:
+Confirm that authentication, Supabase, database, QR scanning, attendance, navigation, and API logic were untouched.
+
+PACKAGES:
+Confirm no packages were installed, removed, or changed.
+
+CONFIG:
+Confirm app.json, eas.json, package.json, and .env were untouched.
+
+ERRORS:
+Report TypeScript errors, or say "No errors found."
+
+FINAL STATUS:
+READY FOR AUDIT
+or
+NEEDS FIXES
