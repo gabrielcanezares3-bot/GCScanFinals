@@ -1,0 +1,13 @@
+GCScan prepared build
+
+1. Copy .env.example to .env.
+2. Add the GCScan Supabase URL and anonymous key to .env.
+3. Run npm install.
+4. Run npx expo start.
+5. For an Android APK, use the existing EAS preview profile:
+   eas build --platform android --profile preview
+
+Important:
+- The original .env was intentionally excluded from this archive for security.
+- Do not commit secrets to GitHub.
+- This archive contains the current GCScan source plus the 15-day Recently Deleted event system.

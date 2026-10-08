@@ -1,0 +1,62 @@
+export const TYPOGRAPHY = {
+  fontFamily: 'Inter_400Regular',
+  mediumFontFamily: 'Inter_500Medium',
+  semiboldFontFamily: 'Inter_600SemiBold',
+  displayFontFamily: 'SpaceGrotesk_700Bold',
+  headingFontFamily: 'SpaceGrotesk_600SemiBold',
+  numberFontFamily: 'SpaceGrotesk_700Bold',
+  display: {
+    fontFamily: 'SpaceGrotesk_700Bold',
+    fontSize: 34,
+    lineHeight: 40,
+    letterSpacing: -0.9,
+  },
+  screenTitle: {
+    fontFamily: 'SpaceGrotesk_700Bold',
+    fontSize: 28,
+    lineHeight: 35,
+    letterSpacing: -0.65,
+  },
+  sectionTitle: {
+    fontFamily: 'SpaceGrotesk_600SemiBold',
+    fontSize: 18,
+    lineHeight: 23,
+    letterSpacing: -0.2,
+  },
+  body: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 14,
+    lineHeight: 21,
+    letterSpacing: 0,
+  },
+  bodyStrong: {
+    fontFamily: 'Inter_600SemiBold',
+    fontSize: 14,
+    lineHeight: 20,
+    letterSpacing: 0,
+  },
+  caption: {
+    fontFamily: 'Inter_500Medium',
+    fontSize: 11,
+    lineHeight: 16,
+    letterSpacing: 0.15,
+  },
+  label: {
+    fontFamily: 'Inter_600SemiBold',
+    fontSize: 10,
+    lineHeight: 14,
+    letterSpacing: 0.85,
+  },
+  button: {
+    fontFamily: 'Inter_600SemiBold',
+    fontSize: 15,
+    lineHeight: 20,
+    letterSpacing: 0,
+  },
+  stat: {
+    fontFamily: 'SpaceGrotesk_700Bold',
+    fontSize: 24,
+    lineHeight: 29,
+    letterSpacing: -0.35,
+  },
+} as const;
