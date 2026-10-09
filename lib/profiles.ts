@@ -27,6 +27,11 @@ export async function updateProfile(
   userId: string,
   updates: { full_name?: string }
 ): Promise<{ error: string | null }> {
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user || user.id !== userId) {
+    return { error: 'Your session could not be verified. Please sign in again.' };
+  }
+
   const { error } = await supabase
     .from('profiles')
     .update(updates)

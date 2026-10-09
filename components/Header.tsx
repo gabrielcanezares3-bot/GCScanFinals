@@ -11,11 +11,11 @@ export default function Header({ title }: { title: string }) {
         <Image source={require('@/assets/images/icon.png')} style={styles.logo} contentFit="contain" />
       </View>
       <View style={styles.titleBlock}>
-        <Text style={styles.kicker}>GCSCAN</Text>
+        <Text style={styles.kicker}>SYNCRA</Text>
         <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.actionCircle}>
-        <Ionicons name="notifications-outline" size={19} color="#E8EDFF" />
+        <Ionicons name="notifications-outline" size={19} color={COLORS.textPrimary} />
       </View>
     </View>
   );
@@ -32,16 +32,16 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: COLORS.royalPanel,
+    backgroundColor: COLORS.primaryDeep,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: COLORS.champagneBorder,
-    shadowColor: COLORS.neonGlowDeep,
-    shadowOpacity: 0.45,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 7 },
-    elevation: 4,
+    borderColor: 'rgba(255,255,255,0.72)',
+    shadowColor: COLORS.shadow,
+    shadowOpacity: 0.14,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 5 },
+    elevation: 3,
   },
   logo: { width: 34, height: 34 },
   titleBlock: { flex: 1, marginLeft: SPACE.md },
@@ -50,8 +50,6 @@ const styles = StyleSheet.create({
     fontFamily: TYPOGRAPHY.displayFontFamily,
     color: COLORS.champagne,
     letterSpacing: 1.4,
-    textShadowColor: 'rgba(255,79,216,0.42)',
-    textShadowRadius: 7,
   },
   title: {
     fontFamily: TYPOGRAPHY.displayFontFamily,

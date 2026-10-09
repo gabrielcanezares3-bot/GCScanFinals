@@ -114,9 +114,9 @@ export default function ScanScreen() {
       <View style={styles.permissionContainer}>
         <AmbientBackground variant="compact" />
         <View style={styles.permissionCard}>
-          <View style={styles.permissionIcon}><Ionicons name="scan-outline" size={30} color={COLORS.cyan} /></View>
+          <View style={styles.permissionIcon}><Ionicons name="scan-outline" size={30} color="#FFFFFF" /></View>
           <Text style={styles.permissionTitle}>Camera access</Text>
-          <Text style={styles.permissionText}>Allow camera access so GCScan can read attendance QR codes.</Text>
+          <Text style={styles.permissionText}>Allow camera access so SYNCRA can read attendance QR codes.</Text>
           <AppButton theme="primary" title="Grant Permission" icon="camera-outline" onPress={requestPermission} />
         </View>
       </View>
@@ -191,7 +191,7 @@ export default function ScanScreen() {
       <View style={styles.cameraShade} pointerEvents="none" />
 
       <View style={[styles.topBar, { paddingTop: insets.top + 8 }]} pointerEvents="none">
-        <View><Text style={styles.topEyebrow}>GCSCAN</Text><Text style={styles.topTitle}>Scan attendance</Text></View>
+        <View><Text style={styles.topEyebrow}>SYNCRA</Text><Text style={styles.topTitle}>Scan attendance</Text></View>
         <View style={styles.topBadge}><View style={styles.topDot} /><Text style={styles.topBadgeText}>LIVE</Text></View>
       </View>
 
@@ -215,14 +215,14 @@ export default function ScanScreen() {
         <View style={styles.overlay}>
         <View style={styles.handle} />
         <View style={styles.overlayHeader}>
-          <Animated.View style={[styles.overlayIcon, success && styles.overlayIconSuccess, { transform: [{ scale: success ? successMotion.interpolate({ inputRange: [0, 1], outputRange: [0.72, 1] }) : 1 }] }]}><Ionicons name={scanned ? (success ? 'checkmark' : 'alert') : 'scan-outline'} size={19} color={success ? COLORS.success : COLORS.cyan} /></Animated.View>
+          <Animated.View style={[styles.overlayIcon, success && styles.overlayIconSuccess, { transform: [{ scale: success ? successMotion.interpolate({ inputRange: [0, 1], outputRange: [0.72, 1] }) : 1 }] }]}><Ionicons name={scanned ? (success ? 'checkmark' : 'alert') : 'scan-outline'} size={19} color={success ? COLORS.success : COLORS.primary} /></Animated.View>
           <View style={styles.overlayCopy}>
             <Text style={styles.overlayEyebrow}>{scanned ? (success ? 'ATTENDANCE RECORDED' : 'SCAN RESULT') : 'READY TO SCAN'}</Text>
             <Text style={styles.overlayTitle}>{scanned ? (success ? 'You are checked in.' : 'We found a QR code.') : 'Center the QR code'}</Text>
           </View>
         </View>
 
-        {!scanned && <Text style={styles.overlayText}>Keep the QR inside the frame. GCScan will detect it automatically.</Text>}
+        {!scanned && <Text style={styles.overlayText}>Keep the QR inside the frame. SYNCRA will detect it automatically.</Text>}
         {scanned && message && <Text style={[styles.scanResult, success ? styles.success : styles.error]}>{message}</Text>}
         {scanned && pendingScan && lateReasonEnabled && !success && (
           <View style={styles.reasonPanel}>
@@ -263,18 +263,18 @@ const styles = StyleSheet.create({
   camera: { ...StyleSheet.absoluteFillObject },
   cameraShade: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(9,12,52,0.30)' },
   topBar: { position: 'absolute', top: 0, left: SPACE.lg, right: SPACE.lg, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  topEyebrow: { ...TYPOGRAPHY.label, fontFamily: TYPOGRAPHY.semiboldFontFamily, color: COLORS.textSecondary },
-  topTitle: { fontFamily: TYPOGRAPHY.displayFontFamily, fontSize: 20, color: COLORS.textPrimary, marginTop: 2 },
-  topBadge: { flexDirection: 'row', alignItems: 'center', height: 31, paddingHorizontal: 11, borderRadius: RADIUS.pill, backgroundColor: 'rgba(10,13,48,0.52)', borderWidth: 1, borderColor: COLORS.glassBorder },
+  topEyebrow: { ...TYPOGRAPHY.label, fontFamily: TYPOGRAPHY.semiboldFontFamily, color: 'rgba(255,255,255,0.82)' },
+  topTitle: { fontFamily: TYPOGRAPHY.displayFontFamily, fontSize: 20, color: '#FFFFFF', marginTop: 2 },
+  topBadge: { flexDirection: 'row', alignItems: 'center', height: 31, paddingHorizontal: 11, borderRadius: RADIUS.pill, backgroundColor: 'rgba(22,37,83,0.58)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.32)' },
   topDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#5DE4B3', marginRight: 6 },
-  topBadgeText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 9, letterSpacing: 1, color: COLORS.textPrimary },
+  topBadgeText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 9, letterSpacing: 1, color: '#FFFFFF' },
   scannerStage: { position: 'absolute', width: SCANNER_FRAME_SIZE, height: SCANNER_FRAME_SIZE, top: '22%', alignSelf: 'center' },
   scannerPulse: { ...StyleSheet.absoluteFillObject, borderRadius: SCANNER_FRAME_RADIUS, borderWidth: 1.25, shadowOffset: { width: 0, height: 0 }, shadowRadius: 10, elevation: 2 },
-  scannerPulseCyan: { borderColor: 'rgba(53,232,255,0.82)', shadowColor: COLORS.cyan, shadowOpacity: 0.32 },
-  scannerPulseViolet: { borderColor: 'rgba(150,112,255,0.78)', shadowColor: COLORS.violet, shadowOpacity: 0.28 },
-  scanFrame: { width: '100%', height: '100%', borderRadius: SCANNER_FRAME_RADIUS, borderWidth: SCANNER_FRAME_BORDER_WIDTH, borderColor: 'rgba(53,232,255,0.24)', backgroundColor: 'rgba(255,255,255,0.025)', overflow: 'hidden', shadowColor: COLORS.cyan, shadowOpacity: 0.24, shadowRadius: 30, shadowOffset: { width: 0, height: 0 }, elevation: 6 },
-  frameGlow: { ...StyleSheet.absoluteFillObject, borderRadius: SCANNER_FRAME_RADIUS, borderWidth: 1, borderColor: COLORS.cyan, backgroundColor: 'rgba(53,232,255,0.035)' },
-  frameCorner: { position: 'absolute', width: 52, height: 52, borderColor: COLORS.cyan, shadowColor: COLORS.cyan, shadowOpacity: 0.85, shadowRadius: 8, shadowOffset: { width: 0, height: 0 } },
+  scannerPulseCyan: { borderColor: 'rgba(151,191,255,0.82)', shadowColor: COLORS.primarySoft, shadowOpacity: 0.32 },
+  scannerPulseViolet: { borderColor: 'rgba(181,165,255,0.78)', shadowColor: COLORS.violet, shadowOpacity: 0.28 },
+  scanFrame: { width: '100%', height: '100%', borderRadius: SCANNER_FRAME_RADIUS, borderWidth: SCANNER_FRAME_BORDER_WIDTH, borderColor: 'rgba(188,207,255,0.32)', backgroundColor: 'rgba(255,255,255,0.035)', overflow: 'hidden', shadowColor: COLORS.primary, shadowOpacity: 0.24, shadowRadius: 30, shadowOffset: { width: 0, height: 0 }, elevation: 6 },
+  frameGlow: { ...StyleSheet.absoluteFillObject, borderRadius: SCANNER_FRAME_RADIUS, borderWidth: 1, borderColor: COLORS.primarySoft, backgroundColor: 'rgba(101,142,255,0.05)' },
+  frameCorner: { position: 'absolute', width: 52, height: 52, borderColor: '#9AB8FF', shadowColor: COLORS.primarySoft, shadowOpacity: 0.72, shadowRadius: 8, shadowOffset: { width: 0, height: 0 } },
   frameTL: { top: -1, left: -1, borderTopWidth: 4, borderLeftWidth: 4, borderTopLeftRadius: 19 },
   frameTR: { top: -1, right: -1, borderTopWidth: 4, borderRightWidth: 4, borderTopRightRadius: 19 },
   frameBL: { bottom: -1, left: -1, borderBottomWidth: 4, borderLeftWidth: 4, borderBottomLeftRadius: 19 },
@@ -282,10 +282,10 @@ const styles = StyleSheet.create({
   scanningLine: { position: 'absolute', top: SCANNER_FRAME_SIZE / 2 - SCANNING_LINE_HEIGHT / 2, left: 18, right: 18, height: SCANNING_LINE_HEIGHT, borderRadius: 3, backgroundColor: '#FFFFFF', shadowColor: '#FFFFFF', shadowOpacity: 0.65, shadowRadius: 8, shadowOffset: { width: 0, height: 0 } },
   frameCenter: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' },
   overlayPosition: { position: 'absolute', left: 12, right: 12, maxWidth: 540, alignSelf: 'center' },
-  overlay: { backgroundColor: COLORS.glassStrong, borderRadius: 32, padding: 18, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: '#02040F', shadowOpacity: 0.6, shadowRadius: 26, shadowOffset: { width: 0, height: 12 }, elevation: 9 },
-  handle: { alignSelf: 'center', width: 42, height: 4, borderRadius: 4, backgroundColor: 'rgba(127,143,255,0.30)', marginBottom: 13 },
+  overlay: { backgroundColor: '#FFFFFF', borderRadius: 30, padding: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,0.9)', shadowColor: '#172852', shadowOpacity: 0.28, shadowRadius: 26, shadowOffset: { width: 0, height: 12 }, elevation: 9 },
+  handle: { alignSelf: 'center', width: 42, height: 4, borderRadius: 4, backgroundColor: COLORS.border, marginBottom: 13 },
   overlayHeader: { flexDirection: 'row', alignItems: 'center' },
-  overlayIcon: { width: 48, height: 48, borderRadius: 24, backgroundColor: 'rgba(56,225,255,0.12)', borderWidth: 1, borderColor: 'rgba(56,225,255,0.25)', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
+  overlayIcon: { width: 48, height: 48, borderRadius: 18, backgroundColor: COLORS.primaryTint, borderWidth: 1, borderColor: 'rgba(49,95,232,0.16)', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
   overlayIconSuccess: { backgroundColor: 'rgba(66,230,164,0.14)', borderColor: 'rgba(66,230,164,0.42)' },
   overlayCopy: { flex: 1 },
   overlayEyebrow: { ...TYPOGRAPHY.label, fontFamily: TYPOGRAPHY.semiboldFontFamily, color: COLORS.cyan },
@@ -295,16 +295,16 @@ const styles = StyleSheet.create({
   success: { color: COLORS.success },
   error: { color: COLORS.danger },
   scanData: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 10, lineHeight: 15, color: COLORS.textMuted, textAlign: 'center', marginBottom: 8 },
-  reasonPanel: { marginTop: 12, padding: 14, borderRadius: 28, backgroundColor: 'rgba(61,91,255,0.12)', borderWidth: 1, borderColor: COLORS.glassBorder },
+  reasonPanel: { marginTop: 12, padding: 14, borderRadius: 28, backgroundColor: COLORS.primaryTint, borderWidth: 1, borderColor: COLORS.glassBorder },
   reasonTitle: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 11, color: COLORS.textPrimary, marginBottom: 8 },
   reasonRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginBottom: 10 },
-  reasonChip: { paddingHorizontal: 12, minHeight: 34, borderRadius: RADIUS.pill, backgroundColor: 'rgba(61,91,255,0.12)', borderWidth: 1, borderColor: COLORS.glassBorder, justifyContent: 'center' },
-  reasonChipActive: { backgroundColor: COLORS.primary, borderColor: 'rgba(56,225,255,0.45)' },
+  reasonChip: { paddingHorizontal: 12, minHeight: 34, borderRadius: RADIUS.pill, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder, justifyContent: 'center' },
+  reasonChipActive: { backgroundColor: COLORS.primary, borderColor: COLORS.primary },
   reasonChipText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 9, color: COLORS.textSecondary },
   reasonChipTextActive: { color: '#FFFFFF' },
   permissionContainer: { flex: 1, backgroundColor: COLORS.background, alignItems: 'center', justifyContent: 'center', paddingHorizontal: SPACE.lg },
-  permissionCard: { width: '100%', maxWidth: 430, backgroundColor: COLORS.glassStrong, borderRadius: RADIUS.xl, padding: SPACE.xl, borderWidth: 1, borderColor: COLORS.glassBorder, alignItems: 'center', shadowColor: '#02040F', shadowOpacity: 0.55, shadowRadius: 24, shadowOffset: { width: 0, height: 12 }, elevation: 6 },
-  permissionIcon: { width: 76, height: 76, borderRadius: 38, backgroundColor: COLORS.royalPanel, borderWidth: 1, borderColor: 'rgba(56,225,255,0.35)', alignItems: 'center', justifyContent: 'center', marginBottom: SPACE.lg },
+  permissionCard: { width: '100%', maxWidth: 430, backgroundColor: '#FFFFFF', borderRadius: RADIUS.xl, padding: SPACE.xl, borderWidth: 1, borderColor: COLORS.glassBorder, alignItems: 'center', shadowColor: COLORS.shadowDeep, shadowOpacity: 0.16, shadowRadius: 24, shadowOffset: { width: 0, height: 12 }, elevation: 4 },
+  permissionIcon: { width: 76, height: 76, borderRadius: 26, backgroundColor: COLORS.primary, borderWidth: 1, borderColor: 'rgba(255,255,255,0.55)', alignItems: 'center', justifyContent: 'center', marginBottom: SPACE.lg },
   permissionTitle: { fontFamily: TYPOGRAPHY.displayFontFamily, fontSize: 24, color: COLORS.textPrimary, textAlign: 'center' },
   permissionText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 14, lineHeight: 21, color: COLORS.textSecondary, textAlign: 'center', marginTop: SPACE.sm, marginBottom: SPACE.lg },
 });

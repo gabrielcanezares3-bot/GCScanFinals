@@ -50,7 +50,7 @@ function ScanTabButton({
     >
       <View style={[styles.scanGlow, focused && styles.scanGlowActive]} pointerEvents="none" />
       <View style={[styles.scanFab, focused && styles.scanFabActive]}>
-        <Ionicons name={focused ? 'scan' : 'scan-outline'} size={30} color={focused ? '#FFFFFF' : COLORS.cyan} />
+        <Ionicons name={focused ? 'scan' : 'scan-outline'} size={28} color="#FFFFFF" />
       </View>
       <Text style={[styles.scanLabel, focused && styles.scanLabelActive]}>SCAN</Text>
     </AnimatedPressable>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 34,
     borderRadius: 17,
-    backgroundColor: 'rgba(124,60,255,0.10)',
+    backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: 'transparent',
     alignItems: 'center',
@@ -73,12 +73,12 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     backgroundColor: COLORS.primary,
     borderWidth: 1,
-    borderColor: COLORS.champagneBorder,
-    shadowColor: COLORS.neonGlowDeep,
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 4,
+    borderColor: 'rgba(255,255,255,0.46)',
+    shadowColor: COLORS.primary,
+    shadowOpacity: 0.16,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 2,
   },
   activeDot: {
     position: 'absolute',
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     width: 4,
     height: 4,
     borderRadius: 2,
-    backgroundColor: COLORS.champagne,
+    backgroundColor: '#FFFFFF',
   },
   scanWrap: {
     flex: 1,
@@ -100,10 +100,10 @@ const styles = StyleSheet.create({
     width: 78,
     height: 78,
     borderRadius: 39,
-    backgroundColor: 'rgba(34,184,255,0.12)',
+    backgroundColor: COLORS.primaryTint,
   },
   scanGlowActive: {
-    backgroundColor: 'rgba(34,184,255,0.18)',
+    backgroundColor: COLORS.primaryTint,
   },
   scanFab: {
     marginTop: -30,
@@ -111,20 +111,20 @@ const styles = StyleSheet.create({
     height: 66,
     borderRadius: 33,
     backgroundColor: COLORS.primary,
-    borderWidth: 1.5,
-    borderColor: 'rgba(53,232,255,0.55)',
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: COLORS.cyan,
-    shadowOpacity: 0.38,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 6 },
-    elevation: 8,
+    shadowColor: COLORS.primary,
+    shadowOpacity: 0.24,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 5 },
+    elevation: 5,
   },
   scanFabActive: {
-    backgroundColor: '#168FEA',
-    borderColor: '#72DEFF',
-    shadowOpacity: 0.55,
+    backgroundColor: COLORS.primaryDeep,
+    borderColor: '#FFFFFF',
+    shadowOpacity: 0.24,
   },
   scanLabel: {
     fontFamily: TYPOGRAPHY.mediumFontFamily,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     color: COLORS.textMuted,
     marginTop: 4,
   },
-  scanLabelActive: { color: '#72DEFF' },
+  scanLabelActive: { color: COLORS.primary },
 });
 
 export default function TabLayout() {
@@ -143,8 +143,8 @@ export default function TabLayout() {
       initialRouteName="index"
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: '#FFFFFF',
-        tabBarInactiveTintColor: '#7A86B8',
+        tabBarActiveTintColor: COLORS.textPrimary,
+        tabBarInactiveTintColor: COLORS.textMuted,
         tabBarStyle: {
           position: 'absolute',
           left: 14,
@@ -152,19 +152,19 @@ export default function TabLayout() {
           bottom: 16,
           height: 78,
           borderRadius: 26,
-          backgroundColor: 'rgba(13,8,38,0.94)',
+          backgroundColor: 'rgba(255,255,255,0.97)',
           borderWidth: 1,
-          borderColor: 'rgba(184,145,255,0.22)',
+          borderColor: COLORS.glassBorder,
           borderTopWidth: 1,
-          borderTopColor: 'rgba(184,145,255,0.22)',
+          borderTopColor: COLORS.glassBorder,
           paddingTop: 10,
           paddingBottom: 12,
           paddingHorizontal: 10,
           elevation: 12,
-          shadowColor: '#02040F',
-          shadowOpacity: 0.55,
-          shadowRadius: 24,
-          shadowOffset: { width: 0, height: 12 },
+          shadowColor: COLORS.shadow,
+          shadowOpacity: 0.12,
+          shadowRadius: 20,
+          shadowOffset: { width: 0, height: 8 },
         },
         tabBarLabelStyle: {
           fontFamily: TYPOGRAPHY.mediumFontFamily,

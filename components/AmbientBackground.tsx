@@ -1,6 +1,5 @@
 import { AccessibilityInfo, StyleSheet, View } from 'react-native';
-import { useWindowDimensions } from 'react-native';
-import Svg, { Circle, Defs, G, RadialGradient, Stop, Text as SvgText } from 'react-native-svg';
+import Svg, { Circle, Defs, RadialGradient, Stop } from 'react-native-svg';
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 import { useEffect } from 'react';
 import { useIsFocused } from '@react-navigation/native';
@@ -19,7 +18,6 @@ export default function AmbientBackground({
 }: AmbientBackgroundProps) {
   const compact = variant === 'compact';
   const isFocused = useIsFocused();
-  const { width, height } = useWindowDimensions();
   const drift = useSharedValue(0);
   const breathing = useSharedValue(0);
 
@@ -58,92 +56,39 @@ export default function AmbientBackground({
     transform: [{ translateX: -12 + drift.value * 24 }, { translateY: 10 - drift.value * 20 }, { scale: 0.96 + drift.value * 0.08 }],
     opacity: 0.07 + breathing.value * 0.05,
   }));
-  const wordmarkMotion = useAnimatedStyle(() => ({
-    opacity: 0.9 + breathing.value * 0.1,
-    transform: [
-      { translateX: -2 + drift.value * 4 },
-      { translateY: -5 + drift.value * 10 },
-    ],
-  }));
-  const wordmarkX = width * (graphicSide === 'left' ? 0.10 : 0.90);
-  const wordmarkY = height * (compact ? 0.52 : 0.50);
-  const wordmarkSize = Math.min(height * 0.30, 290);
-
   return (
     <View pointerEvents="none" style={[StyleSheet.absoluteFillObject, style]}>
       <View style={styles.base} />
       <Animated.View style={[styles.orb, styles.orbOne, orbOne]} />
-      <Animated.View style={[styles.orb, styles.orbTwo, orbTwo]} />
+      <Animated.View style={[styles.orb, styles.orbTwo, graphicSide === 'left' ? styles.orbTwoRight : styles.orbTwoLeft, orbTwo]} />
       <Animated.View style={[styles.orb, styles.orbThree, orbThree]} />
       <Svg width="100%" height="100%" style={StyleSheet.absoluteFillObject}>
         <Defs>
           <RadialGradient id="violet" cx="50%" cy="50%" r="50%">
-            <Stop offset="0%" stopColor={COLORS.violet} stopOpacity="0.30" />
-            <Stop offset="60%" stopColor={COLORS.primary} stopOpacity="0.10" />
+            <Stop offset="0%" stopColor={COLORS.violet} stopOpacity="0.24" />
+            <Stop offset="60%" stopColor={COLORS.primary} stopOpacity="0.08" />
             <Stop offset="100%" stopColor={COLORS.primary} stopOpacity="0" />
           </RadialGradient>
           <RadialGradient id="cyan" cx="50%" cy="50%" r="50%">
             <Stop offset="0%" stopColor={COLORS.cyan} stopOpacity="0.18" />
-            <Stop offset="65%" stopColor={COLORS.cyan} stopOpacity="0.05" />
+            <Stop offset="65%" stopColor={COLORS.cyan} stopOpacity="0.04" />
             <Stop offset="100%" stopColor={COLORS.cyan} stopOpacity="0" />
           </RadialGradient>
           <RadialGradient id="magenta" cx="50%" cy="50%" r="50%">
-            <Stop offset="0%" stopColor={COLORS.champagne} stopOpacity="0.18" />
-            <Stop offset="65%" stopColor={COLORS.champagne} stopOpacity="0.04" />
+            <Stop offset="0%" stopColor="#B9C9FF" stopOpacity="0.24" />
+            <Stop offset="65%" stopColor="#B9C9FF" stopOpacity="0.05" />
             <Stop offset="100%" stopColor={COLORS.champagne} stopOpacity="0" />
           </RadialGradient>
           <RadialGradient id="blue" cx="50%" cy="50%" r="50%">
-            <Stop offset="0%" stopColor="#315BFF" stopOpacity="0.13" />
-            <Stop offset="100%" stopColor="#315BFF" stopOpacity="0" />
+            <Stop offset="0%" stopColor="#91ACEE" stopOpacity="0.12" />
+            <Stop offset="100%" stopColor="#91ACEE" stopOpacity="0" />
           </RadialGradient>
         </Defs>
-        <Circle cx={compact ? '90%' : '86%'} cy="8%" r={compact ? '46%' : '52%'} fill="url(#violet)" />
-        <Circle cx="7%" cy={compact ? '88%' : '94%'} r={compact ? '42%' : '48%'} fill="url(#cyan)" />
-        <Circle cx={compact ? '18%' : '16%'} cy={compact ? '18%' : '20%'} r={compact ? '38%' : '42%'} fill="url(#magenta)" />
-        <Circle cx={compact ? '84%' : '78%'} cy={compact ? '72%' : '70%'} r={compact ? '35%' : '38%'} fill="url(#blue)" />
+        <Circle cx={compact ? '94%' : '90%'} cy="5%" r={compact ? '38%' : '44%'} fill="url(#violet)" />
+        <Circle cx="4%" cy={compact ? '94%' : '96%'} r={compact ? '38%' : '44%'} fill="url(#cyan)" />
+        <Circle cx={compact ? '8%' : '12%'} cy={compact ? '14%' : '18%'} r={compact ? '31%' : '36%'} fill="url(#magenta)" />
+        <Circle cx={compact ? '88%' : '80%'} cy={compact ? '74%' : '76%'} r={compact ? '31%' : '35%'} fill="url(#blue)" />
       </Svg>
-      <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFillObject, wordmarkMotion]}>
-        <Svg width={width} height={height}>
-          <Defs>
-            <RadialGradient id="wordmarkStroke" cx="50%" cy="50%" r="72%">
-              <Stop offset="0%" stopColor={COLORS.cyan} stopOpacity="0.95" />
-              <Stop offset="48%" stopColor={COLORS.violet} stopOpacity="0.88" />
-              <Stop offset="100%" stopColor={COLORS.champagne} stopOpacity="0.92" />
-            </RadialGradient>
-          </Defs>
-          <G transform={`rotate(-90 ${wordmarkX} ${wordmarkY})`}>
-            <SvgText
-              x={wordmarkX}
-              y={wordmarkY + wordmarkSize * 0.35}
-              textAnchor="middle"
-              fontFamily="SpaceGrotesk_700Bold"
-              fontSize={wordmarkSize}
-              letterSpacing={wordmarkSize * 0.025}
-              fill="none"
-              stroke="url(#wordmarkStroke)"
-              strokeWidth={5}
-              opacity={0.16}
-            >
-              GCSCAN
-            </SvgText>
-            <SvgText
-              x={wordmarkX}
-              y={wordmarkY + wordmarkSize * 0.35}
-              textAnchor="middle"
-              fontFamily="SpaceGrotesk_700Bold"
-              fontSize={wordmarkSize}
-              letterSpacing={wordmarkSize * 0.025}
-              fill="none"
-              stroke="url(#wordmarkStroke)"
-              strokeWidth={1.15}
-              opacity={0.38}
-            >
-              GCSCAN
-            </SvgText>
-          </G>
-        </Svg>
-      </Animated.View>
-      <View style={styles.vignette} />
     </View>
   );
 }
@@ -151,8 +96,9 @@ export default function AmbientBackground({
 const styles = StyleSheet.create({
   base: { ...StyleSheet.absoluteFillObject, backgroundColor: COLORS.background },
   orb: { position: 'absolute', borderRadius: 999 },
-  orbOne: { width: 230, height: 230, top: -60, right: -70, backgroundColor: COLORS.champagne },
-  orbTwo: { width: 200, height: 200, bottom: 80, left: -80, backgroundColor: COLORS.primary },
-  orbThree: { width: 150, height: 150, top: '38%', right: -55, backgroundColor: COLORS.cyan },
-  vignette: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(5,3,18,0.18)' },
+  orbOne: { width: 220, height: 220, top: -120, right: -100, backgroundColor: 'rgba(49,95,232,0.06)' },
+  orbTwo: { width: 190, height: 190, bottom: 70, backgroundColor: 'rgba(155,141,235,0.08)' },
+  orbTwoLeft: { left: -100 },
+  orbTwoRight: { right: -100 },
+  orbThree: { width: 130, height: 130, top: '40%', right: -80, backgroundColor: 'rgba(56,175,167,0.05)' },
 });

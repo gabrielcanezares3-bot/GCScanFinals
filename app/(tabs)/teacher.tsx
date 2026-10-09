@@ -17,6 +17,7 @@ import {
   View,
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import Svg, { Circle, Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 
 import AppButton from '@/components/AppButton';
 import EntranceView from '@/components/EntranceView';
@@ -444,14 +445,32 @@ export default function TeacherScreen() {
         showsVerticalScrollIndicator={false}
       >
         <EntranceView>
-        <Text style={styles.title}>Create Event QR</Text>
-        <Text style={styles.subtitle}>
-          Fill in the event details, then scan the generated QR with the Scan tab.
-        </Text>
+          <View style={styles.teacherBanner}>
+            <Svg width="100%" height="100%" style={StyleSheet.absoluteFillObject}>
+              <Defs><LinearGradient id="teacherHero" x1="0" y1="0" x2="1" y2="1"><Stop offset="0%" stopColor="#315FE8" /><Stop offset="100%" stopColor="#625BD0" /></LinearGradient></Defs>
+              <Rect width="100%" height="100%" rx="27" fill="url(#teacherHero)" />
+              <Circle cx="100%" cy="0%" r="90" fill="#FFFFFF" fillOpacity="0.10" />
+              <Circle cx="5%" cy="115%" r="78" fill="#8CE0D5" fillOpacity="0.14" />
+            </Svg>
+            <View style={styles.teacherBannerCopy}>
+              <Text style={styles.teacherEyebrow}>TEACHER STUDIO · EVENT TOOLS</Text>
+              <Text style={styles.teacherBannerTitle}>Bring your{'\n'}class together.</Text>
+              <Text style={styles.teacherBannerText}>Create a QR event and see check-ins as they happen.</Text>
+            </View>
+            <View style={styles.teacherBannerArt}>
+              <Ionicons name="qr-code-outline" size={32} color="#FFFFFF" />
+              <View style={styles.teacherBannerArtDot}><Ionicons name="add" size={13} color={COLORS.primary} /></View>
+            </View>
+          </View>
         </EntranceView>
 
         <EntranceView delay={100}>
         <View style={styles.formCard}>
+          <View style={styles.formHeading}>
+            <View style={styles.formHeadingIcon}><Ionicons name="calendar-outline" size={18} color={COLORS.primary} /></View>
+            <View style={styles.formHeadingCopy}><Text style={styles.formEyebrow}>SET UP A SESSION</Text><Text style={styles.formTitle}>Create an event</Text></View>
+            <View style={styles.formStep}><Text style={styles.formStepText}>01</Text></View>
+          </View>
           <Text style={styles.label}>Event Title</Text>
           <TextInput
             style={styles.input}
@@ -862,33 +881,47 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: COLORS.background },
   container: { flex: 1 },
   centerContainer: { flex: 1, backgroundColor: COLORS.background, alignItems: 'center', justifyContent: 'center', paddingHorizontal: SPACE.xl, overflow: 'hidden' },
-  centerCard: { width: '100%', maxWidth: 430, alignItems: 'center', padding: SPACE.xl, borderRadius: RADIUS.xl, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: '#02040F', shadowOpacity: 0.55, shadowRadius: 22, shadowOffset: { width: 0, height: 10 }, elevation: 5 },
+  centerCard: { width: '100%', maxWidth: 430, alignItems: 'center', padding: SPACE.xl, borderRadius: RADIUS.xl, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: COLORS.shadow, shadowOpacity: 0.14, shadowRadius: 22, shadowOffset: { width: 0, height: 10 }, elevation: 3 },
   checkingText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 13, color: COLORS.textSecondary, marginTop: SPACE.md },
   lockIcon: { width: 62, height: 62, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(56,225,255,0.12)', borderWidth: 1, borderColor: 'rgba(56,225,255,0.25)', marginBottom: SPACE.md },
   lockTitle: { fontFamily: TYPOGRAPHY.displayFontFamily, fontSize: 24, color: COLORS.textPrimary },
   lockSubtitle: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 14, color: COLORS.textSecondary, textAlign: 'center', lineHeight: 21, marginTop: SPACE.sm },
-  content: { paddingHorizontal: SPACE.lg, paddingTop: SPACE.lg, paddingBottom: 116, flexGrow: 1, width: '100%', maxWidth: 560, alignSelf: 'center' },
+  content: { paddingHorizontal: 18, paddingTop: 16, paddingBottom: 132, flexGrow: 1, width: '100%', maxWidth: 580, alignSelf: 'center' },
+  teacherBanner: { minHeight: 172, padding: 18, borderRadius: 27, marginBottom: 14, overflow: 'hidden', justifyContent: 'center', backgroundColor: COLORS.primary, shadowColor: COLORS.primary, shadowOpacity: 0.14, shadowRadius: 18, shadowOffset: { width: 0, height: 8 }, elevation: 3 },
+  teacherBannerCopy: { width: '73%', zIndex: 1 },
+  teacherEyebrow: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 7, color: 'rgba(255,255,255,0.78)', letterSpacing: 0.8, marginBottom: 8 },
+  teacherBannerTitle: { fontFamily: TYPOGRAPHY.displayFontFamily, fontSize: 23, lineHeight: 27, color: '#FFFFFF', letterSpacing: -0.35 },
+  teacherBannerText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 9, lineHeight: 13, color: 'rgba(255,255,255,0.80)', marginTop: 7, maxWidth: 205 },
+  teacherBannerArt: { position: 'absolute', right: 19, top: 47, width: 71, height: 71, borderRadius: 24, backgroundColor: 'rgba(255,255,255,0.15)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.32)', alignItems: 'center', justifyContent: 'center', transform: [{ rotate: '8deg' }] },
+  teacherBannerArtDot: { position: 'absolute', right: -7, top: -7, width: 25, height: 25, borderRadius: 10, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
   title: { ...TYPOGRAPHY.screenTitle, fontFamily: TYPOGRAPHY.displayFontFamily, color: COLORS.textPrimary, marginBottom: 3 },
   subtitle: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 13, color: COLORS.textSecondary, lineHeight: 20, marginBottom: SPACE.lg },
-  formCard: { padding: SPACE.lg, borderRadius: RADIUS.xl, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: '#02040F', shadowOpacity: 0.45, shadowRadius: 18, shadowOffset: { width: 0, height: 7 }, elevation: 3 },
+  formCard: { padding: 18, borderRadius: 26, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: COLORS.shadow, shadowOpacity: 0.09, shadowRadius: 18, shadowOffset: { width: 0, height: 7 }, elevation: 2 },
+  formHeading: { flexDirection: 'row', alignItems: 'center', marginBottom: 3 },
+  formHeadingIcon: { width: 42, height: 42, borderRadius: 15, backgroundColor: COLORS.primaryTint, alignItems: 'center', justifyContent: 'center', marginRight: 10 },
+  formHeadingCopy: { flex: 1 },
+  formEyebrow: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 7, letterSpacing: 0.9, color: COLORS.primary },
+  formTitle: { fontFamily: TYPOGRAPHY.headingFontFamily, fontSize: 17, color: COLORS.textPrimary, marginTop: 2 },
+  formStep: { width: 30, height: 30, borderRadius: 11, backgroundColor: '#F1F4FC', alignItems: 'center', justifyContent: 'center' },
+  formStepText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 8, color: COLORS.textMuted },
   label: { ...TYPOGRAPHY.label, fontFamily: TYPOGRAPHY.semiboldFontFamily, color: COLORS.textMuted, marginBottom: 7, marginTop: 15 },
-  input: { minHeight: 58, backgroundColor: 'rgba(6,10,36,0.55)', borderRadius: 24, borderWidth: 1, borderColor: COLORS.glassBorder, paddingHorizontal: 16, paddingVertical: 13, fontFamily: TYPOGRAPHY.fontFamily, fontSize: 14, color: COLORS.textPrimary },
-  pickerField: { minHeight: 58, backgroundColor: 'rgba(6,10,36,0.55)', borderRadius: 24, borderWidth: 1, borderColor: COLORS.glassBorder, paddingHorizontal: 16, paddingVertical: 10, flexDirection: 'row', alignItems: 'center' },
+  input: { minHeight: 58, backgroundColor: COLORS.pearlPanel, borderRadius: 24, borderWidth: 1, borderColor: COLORS.pearlBorder, paddingHorizontal: 16, paddingVertical: 13, fontFamily: TYPOGRAPHY.fontFamily, fontSize: 14, color: COLORS.pearlText },
+  pickerField: { minHeight: 58, backgroundColor: COLORS.pearlPanel, borderRadius: 24, borderWidth: 1, borderColor: COLORS.pearlBorder, paddingHorizontal: 16, paddingVertical: 10, flexDirection: 'row', alignItems: 'center' },
   pickerFieldPressed: { backgroundColor: COLORS.primaryTint, borderColor: COLORS.primarySoft },
   pickerValue: { flex: 1, fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 13, color: COLORS.textPrimary, marginHorizontal: SPACE.sm },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', marginTop: SPACE.sm },
-  chip: { minHeight: 40, backgroundColor: 'rgba(61,91,255,0.12)', borderRadius: RADIUS.pill, borderWidth: 1, borderColor: COLORS.glassBorder, paddingHorizontal: 13, marginRight: 7, marginBottom: 7, alignItems: 'center', justifyContent: 'center' },
+  chip: { minHeight: 40, backgroundColor: COLORS.primaryTint, borderRadius: RADIUS.pill, borderWidth: 1, borderColor: COLORS.glassBorder, paddingHorizontal: 13, marginRight: 7, marginBottom: 7, alignItems: 'center', justifyContent: 'center' },
   chipPressed: { backgroundColor: COLORS.violetSoft, transform: [{ scale: 0.98 }] },
   chipText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 11, color: COLORS.textSecondary },
   hint: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 11, color: COLORS.textMuted, marginTop: 1, lineHeight: 17 },
-  chipActive: { backgroundColor: COLORS.primary, borderColor: 'rgba(56,225,255,0.45)' },
+  chipActive: { backgroundColor: COLORS.primary, borderColor: COLORS.primary },
   chipTextActive: { color: '#FFFFFF' },
-  toggleRow: { marginTop: SPACE.md, minHeight: 68, borderRadius: 28, backgroundColor: 'rgba(61,91,255,0.12)', borderWidth: 1, borderColor: COLORS.glassBorder, paddingHorizontal: 16, paddingVertical: 11, flexDirection: 'row', alignItems: 'center' },
+  toggleRow: { marginTop: SPACE.md, minHeight: 68, borderRadius: 28, backgroundColor: COLORS.primaryTint, borderWidth: 1, borderColor: COLORS.glassBorder, paddingHorizontal: 16, paddingVertical: 11, flexDirection: 'row', alignItems: 'center' },
   toggleCopy: { flex: 1, paddingRight: 10 },
   toggleTitle: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 12, color: COLORS.textPrimary },
   toggleText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 10, lineHeight: 15, color: COLORS.textSecondary, marginTop: 2 },
-  toggle: { width: 48, height: 28, borderRadius: 16, backgroundColor: 'rgba(127,143,255,0.25)', padding: 3, justifyContent: 'center' },
-  toggleOn: { backgroundColor: COLORS.primary, borderWidth: 1, borderColor: 'rgba(56,225,255,0.45)' },
+  toggle: { width: 48, height: 28, borderRadius: 16, backgroundColor: '#D9DEE0', padding: 3, justifyContent: 'center' },
+  toggleOn: { backgroundColor: COLORS.primary, borderWidth: 1, borderColor: COLORS.primary },
   toggleKnob: { width: 22, height: 22, borderRadius: 11, backgroundColor: '#FFFFFF' },
   toggleKnobOn: { alignSelf: 'flex-end' },
   recoveryRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderTopWidth: 1, borderTopColor: COLORS.border },
@@ -902,13 +935,13 @@ const styles = StyleSheet.create({
   approveButton: { width: 38, height: 38, borderRadius: 14, backgroundColor: 'rgba(61,220,151,0.14)', borderWidth: 1, borderColor: 'rgba(61,220,151,0.28)', alignItems: 'center', justifyContent: 'center' },
   pickerContainer: { marginTop: SPACE.md, alignItems: 'center' },
   message: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 12, color: COLORS.cyan, lineHeight: 18, marginTop: SPACE.md, marginBottom: SPACE.xs },
-  resultCard: { backgroundColor: COLORS.glassStrong, borderRadius: RADIUS.xl, borderWidth: 1, borderColor: COLORS.glassBorder, padding: SPACE.lg, marginTop: SPACE.lg, alignItems: 'center', shadowColor: '#02040F', shadowOpacity: 0.45, shadowRadius: 18, shadowOffset: { width: 0, height: 7 }, elevation: 3 },
+  resultCard: { backgroundColor: COLORS.glassStrong, borderRadius: RADIUS.xl, borderWidth: 1, borderColor: COLORS.glassBorder, padding: SPACE.lg, marginTop: SPACE.lg, alignItems: 'center', shadowColor: COLORS.shadow, shadowOpacity: 0.11, shadowRadius: 18, shadowOffset: { width: 0, height: 7 }, elevation: 2 },
   resultTitle: { fontFamily: TYPOGRAPHY.headingFontFamily, fontSize: 16, color: COLORS.textPrimary, textAlign: 'center', marginBottom: SPACE.md },
   qrBox: { backgroundColor: '#FFFFFF', padding: SPACE.md, borderRadius: 32, marginBottom: SPACE.md, borderWidth: 1, borderColor: 'rgba(56,225,255,0.35)' },
   payloadText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 10, color: COLORS.textSecondary, textAlign: 'center', lineHeight: 15 },
   monitorChipRow: { paddingBottom: SPACE.sm, gap: 8 },
-  monitorChip: { maxWidth: 190, minHeight: 40, justifyContent: 'center', paddingHorizontal: 16, borderRadius: RADIUS.pill, backgroundColor: 'rgba(61,91,255,0.12)', borderWidth: 1, borderColor: COLORS.glassBorder },
-  monitorChipActive: { backgroundColor: COLORS.primaryTint, borderColor: 'rgba(56,225,255,0.35)' },
+  monitorChip: { maxWidth: 190, minHeight: 40, justifyContent: 'center', paddingHorizontal: 16, borderRadius: RADIUS.pill, backgroundColor: COLORS.primaryTint, borderWidth: 1, borderColor: COLORS.glassBorder },
+  monitorChipActive: { backgroundColor: COLORS.primaryTint, borderColor: COLORS.primarySoft },
   monitorChipPressed: { transform: [{ scale: 0.98 }] },
   monitorChipText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 10, color: COLORS.textSecondary },
   monitorChipTextActive: { color: COLORS.cyan },
@@ -924,7 +957,7 @@ const styles = StyleSheet.create({
   deletedActions: { flexDirection: 'row', gap: 7 },
   restoreButton: { width: 36, height: 36, borderRadius: 13, backgroundColor: COLORS.primaryTint, borderWidth: 1, borderColor: COLORS.glassBorder, alignItems: 'center', justifyContent: 'center' },
   permanentButton: { width: 36, height: 36, borderRadius: 13, backgroundColor: 'rgba(255,122,155,0.14)', borderWidth: 1, borderColor: 'rgba(255,122,155,0.28)', alignItems: 'center', justifyContent: 'center' },
-  smartCard: { marginTop: SPACE.lg, padding: SPACE.lg, borderRadius: RADIUS.xl, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: '#02040F', shadowOpacity: 0.45, shadowRadius: 18, shadowOffset: { width: 0, height: 7 }, elevation: 3 },
+  smartCard: { marginTop: SPACE.lg, padding: SPACE.lg, borderRadius: RADIUS.xl, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: COLORS.shadow, shadowOpacity: 0.11, shadowRadius: 18, shadowOffset: { width: 0, height: 7 }, elevation: 2 },
   smartHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: SPACE.md },
   smartIcon: { width: 48, height: 48, borderRadius: 24, backgroundColor: 'rgba(56,225,255,0.12)', borderWidth: 1, borderColor: 'rgba(56,225,255,0.25)', alignItems: 'center', justifyContent: 'center', marginRight: SPACE.sm },
   smartHeaderCopy: { flex: 1 },
@@ -934,12 +967,12 @@ const styles = StyleSheet.create({
   liveEventTitle: { fontFamily: TYPOGRAPHY.headingFontFamily, fontSize: 17, color: COLORS.textPrimary },
   liveEventMeta: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 11, color: COLORS.textSecondary, marginTop: 3 },
   pulseStats: { flexDirection: 'row', gap: 10, marginTop: SPACE.md },
-  pulseStat: { flex: 1, minHeight: 88, padding: 13, borderRadius: 28, backgroundColor: 'rgba(61,91,255,0.12)', borderWidth: 1, borderColor: COLORS.glassBorder },
+  pulseStat: { flex: 1, minHeight: 88, padding: 13, borderRadius: 28, backgroundColor: COLORS.cyanSoft, borderWidth: 1, borderColor: COLORS.glassBorder },
   pulseValue: { fontFamily: TYPOGRAPHY.numberFontFamily, fontSize: 23, color: COLORS.cyan, marginTop: 6 },
   pulseLabel: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 10, color: COLORS.textSecondary, marginTop: 1 },
   liveList: { marginTop: SPACE.md, borderTopWidth: 1, borderTopColor: COLORS.border },
   liveRow: { minHeight: 49, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderBottomColor: COLORS.border },
-  livePerson: { width: 32, height: 32, borderRadius: 16, backgroundColor: 'rgba(61,91,255,0.14)', borderWidth: 1, borderColor: COLORS.glassBorder, alignItems: 'center', justifyContent: 'center', marginRight: 9 },
+  livePerson: { width: 32, height: 32, borderRadius: 16, backgroundColor: COLORS.primaryTint, borderWidth: 1, borderColor: COLORS.glassBorder, alignItems: 'center', justifyContent: 'center', marginRight: 9 },
   livePersonCopy: { flex: 1 },
   livePersonName: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 10, color: COLORS.textPrimary },
   livePersonTime: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 8, color: COLORS.textMuted, marginTop: 2 },
